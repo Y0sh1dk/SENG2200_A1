@@ -5,6 +5,9 @@ public class PA1 {
     }
 
     private void run(String[] args) {
+        Point p = new Point(345.564, 87.111);
+        System.out.println(p);
+        System.out.println(p.distFromOrigin());
 
     }
 }
