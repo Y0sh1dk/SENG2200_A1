@@ -1,0 +1,3 @@
+This represents the toughest input that I will be throwing at your programs. The Polygons are within spec, but quite testing - some are one a single line, some are two per line, some are spread across multiple lines. Being able to handle this sort of input will score you higher than if you only handle single-line polys.
+
+-- Daniel
