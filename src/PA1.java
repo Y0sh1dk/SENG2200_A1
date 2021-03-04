@@ -29,7 +29,6 @@ public class PA1 {
 
     private void run(Path filePath) {
         ArrayList<Polygon> polygonArraylist = this.generatePolygonsFromFile(filePath);
-        System.out.println("test");
     }
 
     private ArrayList<Polygon> generatePolygonsFromFile(Path filePath) {
