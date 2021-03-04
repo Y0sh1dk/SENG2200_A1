@@ -45,15 +45,15 @@ public class PA1 {
                 String str = inputStream.next();
                 if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
                     inputStream.next(); // skip the size
-                    polygons.add(currentPolygon);
+                    polygons.add(currentPolygon); // add last polygon
                     currentPolygon = new Polygon();
                     continue;
                 }
                 currentPolygon.addPoint(Double.parseDouble(str), Double.parseDouble(inputStream.next())); // gets the next two points
             }
             polygons.add(currentPolygon); // add last polygon
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ignored) {
+
         }
         polygons.remove(0); // remove the first empty polygon (couldn't be bothered to fix this)
         return polygons;
