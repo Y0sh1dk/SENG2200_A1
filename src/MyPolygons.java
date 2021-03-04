@@ -9,6 +9,11 @@ public class MyPolygons {
         this.size = 0;
     }
 
+    MyPolygons(Object inData) {
+        this();
+        this.append(inData);
+    }
+
 
     public void prepend(Object inData) {
         if (this.size == 0) { // if CLL is empty
