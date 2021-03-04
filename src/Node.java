@@ -3,14 +3,25 @@ public class Node {
     private Node nextNode;
     private Node prevNode;
 
+    Node() {
+        this.data = null;
+        this.nextNode = null;
+        this.prevNode = null;
+    }
+
     Node(Object inData, Node inNextNode, Node inPrevNode) {
+        this();
         this.data = inData;
         this.nextNode = inNextNode;
         this.prevNode = inPrevNode;
     }
 
     Node(Object inData) {
-        this(inData, null, null);
+        //this(inData, null, null);
+        // TODO: test this, when a blank node is created it will point to itself so dont have to check
+        this();
+        this.setNextNode(this);
+        this.setPrevNode(this);
     }
 
     Node(Object inData, Node inNextNode) {
