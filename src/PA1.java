@@ -1,7 +1,7 @@
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.lang.reflect.Array;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,9 +30,6 @@ public class PA1 {
     private void run(Path filePath) {
         ArrayList<Polygon> polygonArraylist = this.generatePolygonsFromFile(filePath);
         System.out.println("test");
-        //Point p = new Point(345.564, 87.111);
-        //System.out.println(p);
-        //System.out.println(p.distFromOrigin());
     }
 
     private ArrayList<Polygon> generatePolygonsFromFile(Path filePath) {
@@ -45,7 +42,9 @@ public class PA1 {
                 String str = inputStream.next();
                 if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
                     inputStream.next(); // skip the size
-                    polygons.add(currentPolygon); // add last polygon
+                    if(currentPolygon.isValid()) { // if valid polygon
+                        polygons.add(currentPolygon); // add last polygon
+                    }
                     currentPolygon = new Polygon();
                     continue;
                 }
@@ -55,7 +54,6 @@ public class PA1 {
         } catch (Exception ignored) {
 
         }
-        polygons.remove(0); // remove the first empty polygon (couldn't be bothered to fix this)
         return polygons;
     }
 }
