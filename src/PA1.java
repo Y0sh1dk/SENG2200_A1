@@ -1,4 +1,9 @@
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.lang.reflect.Array;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PA1 {
     public static void main(String[] args) {
@@ -7,7 +12,6 @@ public class PA1 {
             return;
         }
         Path filePath = Paths.get(args[0]);
-
         if (Files.exists(filePath)) {                               // If file exists, run
             PA1 main = new PA1();
             System.out.println("Using file: " + filePath);
@@ -24,9 +28,34 @@ public class PA1 {
     }
 
     private void run(Path filePath) {
-        Point p = new Point(345.564, 87.111);
-        System.out.println(p);
-        System.out.println(p.distFromOrigin());
+        ArrayList<Polygon> polygonArraylist = this.generatePolygonsFromFile(filePath);
+        System.out.println("test");
+        //Point p = new Point(345.564, 87.111);
+        //System.out.println(p);
+        //System.out.println(p.distFromOrigin());
+    }
 
+    private ArrayList<Polygon> generatePolygonsFromFile(Path filePath) {
+        ArrayList<Polygon> polygons = new ArrayList<>();
+        System.out.println(filePath.toAbsolutePath());
+        try {
+            Scanner inputStream = new Scanner(new File(String.valueOf(filePath.toAbsolutePath())));
+            Polygon currentPolygon = new Polygon();
+            while (inputStream.hasNext()) {
+                String str = inputStream.next();
+                if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
+                    inputStream.next(); // skip the size
+                    polygons.add(currentPolygon);
+                    currentPolygon = new Polygon();
+                    continue;
+                }
+                currentPolygon.addPoint(Double.parseDouble(str), Double.parseDouble(inputStream.next())); // gets the next two points
+            }
+            polygons.add(currentPolygon); // add last polygon
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        polygons.remove(0); // remove the first empty polygon (couldn't be bothered to fix this)
+        return polygons;
     }
 }
