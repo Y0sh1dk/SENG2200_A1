@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+//TODO: test this class
 public class MyPolygons {
     private Node current;
     private Node sentinal;
@@ -14,6 +17,14 @@ public class MyPolygons {
         this.append(inData);
     }
 
+    MyPolygons(ArrayList<Object> inData) {
+        this();
+        if (inData != null) { // check yo
+            for (Object o : inData) {
+                this.append(o);
+            }
+        }
+    }
 
     public void prepend(Object inData) {
         if (this.size == 0) { // if CLL is empty
