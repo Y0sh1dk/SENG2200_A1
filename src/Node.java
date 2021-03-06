@@ -27,8 +27,10 @@ public class Node {
         return data;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setData(Object inData) {
+        if (inData != null) { // or else it will become a Sentinal, BAD!
+            this.data = inData;
+        }
     }
 
     public Node getNextNode() {
