@@ -17,15 +17,10 @@ public class Node {
     }
 
     Node(Object inData) {
-        //this(inData, null, null);
-        // TODO: test this, when a blank node is created it will point to itself so dont have to check
         this();
-        this.setNextNode(this);
-        this.setPrevNode(this);
-    }
-
-    Node(Object inData, Node inNextNode) {
-        this(inData, inNextNode, null);
+        this.data = inData;
+        this.setNextNode(this); // set next pointer to itself
+        this.setPrevNode(this); // set prev pointer too itself
     }
 
     public Object getData() {

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 //TODO: test this class
 public class MyPolygons {
+    private final Node sentinal;
     private Node current;
-    private Node sentinal;
     private int size;
 
     MyPolygons() {
@@ -12,16 +12,11 @@ public class MyPolygons {
         this.size = 0;
     }
 
-    MyPolygons(Object inData) {
-        this();
-        this.append(inData);
-    }
-
-    MyPolygons(ArrayList<Object> inData) {
+    MyPolygons(ArrayList<Polygon> inData) {
         this();
         if (inData != null) { // check yo
-            for (Object o : inData) {
-                this.append(o);
+            for (Polygon p : inData) {
+                this.append(p);
             }
         }
     }
@@ -56,8 +51,13 @@ public class MyPolygons {
         this.size++;
     }
 
-    public void insert(Object inData) { // insert at current
-
+    public void insert(Object inData) { // insert AT current index
+        Node temp = new Node(inData);
+        temp.setNextNode(current.getNextNode());
+        temp.setPrevNode(current.getPrevNode());
+        current.getPrevNode().setNextNode(temp);
+        current.setPrevNode(temp);
+        current = temp;
         this.size++;
     }
 
@@ -74,11 +74,7 @@ public class MyPolygons {
     }
 
     public void reset() { // resets current to the start of the list
-        if (this.size == 0) {
-            this.current = this.sentinal;
-        } else {
-            this.current = this.sentinal.getNextNode();
-        }
+        this.current = this.sentinal.getNextNode();
     }
 
     public Object take() { // TODO: ???
