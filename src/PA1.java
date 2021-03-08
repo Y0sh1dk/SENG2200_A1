@@ -1,7 +1,5 @@
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,13 +9,13 @@ public class PA1 {
             System.out.println("Usage: PA1 [file]");
             return;
         }
-        Path filePath = Paths.get(args[0]);
+        Path filePath = Path.of(args[0]);
         if (Files.exists(filePath)) {                               // If file exists, run
             PA1 main = new PA1();
             System.out.println("Using file: " + filePath);
             main.run(filePath);
-        } else if (Files.exists(Paths.get((filePath + ".txt")))) {  // If it doesnt, try adding '.txt' extension
-            filePath = Paths.get((filePath + ".txt"));
+        } else if (Files.exists(Path.of((filePath + ".txt")))) {  // If it doesnt, try adding '.txt' extension
+            filePath = Path.of((filePath + ".txt"));
             PA1 main = new PA1();
             System.out.println("Using file: " + filePath);
             main.run(filePath);
@@ -39,7 +37,7 @@ public class PA1 {
         ArrayList<Polygon> polygons = new ArrayList<>();
         System.out.println(filePath.toAbsolutePath());
         try {
-            Scanner inputStream = new Scanner(new File(String.valueOf(filePath.toAbsolutePath())));
+            Scanner inputStream = new Scanner(Path.of(String.valueOf(filePath.toAbsolutePath())));
             Polygon currentPolygon = new Polygon();
             while (inputStream.hasNext()) {
                 String str = inputStream.next();
