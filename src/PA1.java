@@ -30,6 +30,8 @@ public class PA1 {
     private void run(Path filePath) {
         ArrayList<Polygon> polygonArraylist = this.generatePolygonsFromFile(filePath);
         MyPolygons p1 = new MyPolygons(polygonArraylist);
+        //p1.testAreas();
+        p1.testPrints();
         System.out.println("test");
     }
 

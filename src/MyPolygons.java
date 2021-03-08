@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-//TODO: test this class
 public class MyPolygons {
     private final Node sentinal;
     private Node current;
@@ -18,6 +17,15 @@ public class MyPolygons {
             for (Polygon p : inData) {
                 this.append(p);
             }
+        }
+    }
+
+    public void testPrints() {
+        next();
+        for (int i = 0; i < this.size; i++) {
+            Polygon p = (Polygon) current.getData();
+            System.out.println(p);
+            next();
         }
     }
 
