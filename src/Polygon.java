@@ -1,18 +1,29 @@
-import java.util.ArrayList;
 
 public class Polygon implements ComparePoly {
     private static final int minNumOfSides = 3; // Polygon cant have less than 3 sides yo
-    private final ArrayList<Point> points;
+    private Point[] points;
     private int numOfPoints;
 
     Polygon() {
-        this.points = new ArrayList<>();
         this.numOfPoints = 0;
     }
 
-    public void addPoint(double inXCoord, double inYCoord) {
-        this.points.add(new Point(inXCoord, inYCoord));
-        this.numOfPoints++; // increment number of points
+    Polygon(int inSize) {
+        this();
+        this.points = new Point[inSize];
+    }
+
+    public void setSize(int inSize) {
+        this.points = new Point[inSize];
+    }
+
+    public void addPoint(double inXCoord, double inYCoord) throws PolygonFullException {
+        if (numOfPoints < points.length) {
+            this.points[numOfPoints] = new Point(inXCoord, inYCoord);
+            this.numOfPoints++; // increment number of points
+        } else {
+            throw new PolygonFullException();
+        }
     }
 
     public boolean isValid() {
@@ -20,16 +31,20 @@ public class Polygon implements ComparePoly {
     }
 
 
-    private double area() {
-        double a = 0;
-        for (int i = 0; i <= (points.size() - 2); i++) {
-            a += ((points.get(i+1).getxCoordinate() + points.get(i).getxCoordinate()) *
-                    (points.get(i+1).getyCoordinate() - points.get(i).getyCoordinate()));
+    private double area() throws PolygonInvalidException {
+        if (this.isValid()) {
+            double a = 0;
+            for (int i = 0; i <= (points.length - 2); i++) {
+                a += ((points[i+1].getxCoordinate() + points[i].getxCoordinate()) *
+                        (points[i+1].getyCoordinate() - points[i].getyCoordinate()));
+            }
+            // for the last calculation that needs to use the first and last point
+            a += ((points[0].getxCoordinate() + points[points.length-1].getxCoordinate()) *
+                    (points[0].getyCoordinate() - points[points.length-1].getyCoordinate()));
+            return 0.5 * Math.abs(a);
+        } else {
+            throw new PolygonInvalidException();
         }
-        // for the last calculation that needs to use the first and last point
-        a += ((points.get(0).getxCoordinate() + points.get(points.size()-1).getxCoordinate()) *
-                (points.get(0).getyCoordinate() - points.get(points.size()-1).getyCoordinate()));
-        return 0.5 * Math.abs(a);
     }
 
     @Override
@@ -43,7 +58,15 @@ public class Polygon implements ComparePoly {
         for (Point p : points) {
             str.append(p);
         }
-        str.append(String.format("]:  %.2f", this.area()));
+        try {
+            str.append(String.format("]:  %.2f", this.area()));
+        } catch (PolygonInvalidException e) {
+            return "Invalid Polygon";
+        }
         return str.toString();
     }
+
+    static class PolygonFullException extends Exception {}
+
+    static class PolygonInvalidException extends Exception {}
 }

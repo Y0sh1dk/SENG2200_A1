@@ -1,6 +1,5 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PA1 {
@@ -26,15 +25,13 @@ public class PA1 {
     }
 
     private void run(Path filePath) {
-        ArrayList<Polygon> polygonArraylist = this.generatePolygonsFromFile(filePath);
-        MyPolygons p1 = new MyPolygons(polygonArraylist);
-        //p1.testAreas();
+        MyPolygons p1 = new MyPolygons();
+        this.generatePolygonsFromFile(filePath, p1);
+
         p1.testPrints();
-        System.out.println("test");
     }
 
-    private ArrayList<Polygon> generatePolygonsFromFile(Path filePath) {
-        ArrayList<Polygon> polygons = new ArrayList<>();
+    private void generatePolygonsFromFile(Path filePath, MyPolygons polys) {
         System.out.println(filePath.toAbsolutePath());
         try {
             Scanner inputStream = new Scanner(Path.of(String.valueOf(filePath.toAbsolutePath())));
@@ -42,19 +39,17 @@ public class PA1 {
             while (inputStream.hasNext()) {
                 String str = inputStream.next();
                 if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
-                    inputStream.next(); // skip the size
                     if(currentPolygon.isValid()) { // if valid polygon
-                        polygons.add(currentPolygon); // add last polygon
+                        polys.append(currentPolygon); // add last polygon
                     }
-                    currentPolygon = new Polygon();
+                    currentPolygon = new Polygon(Integer.parseInt(inputStream.next()));
                     continue;
                 }
                 currentPolygon.addPoint(Double.parseDouble(str), Double.parseDouble(inputStream.next())); // gets the next two points
             }
-            polygons.add(currentPolygon); // add last polygon
+            polys.append(currentPolygon); // add last polygon
         } catch (Exception ignored) {
 
         }
-        return polygons;
     }
 }
