@@ -30,26 +30,53 @@ public class Polygon implements ComparePoly {
         return this.numOfPoints >= Polygon.minNumOfSides; // returns true of 3 or more points, else returns false
     }
 
-
-    private double area() throws PolygonInvalidException {
-        if (this.isValid()) {
-            double a = 0;
-            for (int i = 0; i <= (points.length - 2); i++) {
-                a += ((points[i+1].getxCoordinate() + points[i].getxCoordinate()) *
-                        (points[i+1].getyCoordinate() - points[i].getyCoordinate()));
+    public double shortestDistToOrigin() {
+        double shortestDist = this.points[0].distFromOrigin(); // Initialize with any value from the array
+        for(Point p: this.points) {
+            if (p.distFromOrigin() < shortestDist) {
+                shortestDist = p.distFromOrigin();
             }
-            // for the last calculation that needs to use the first and last point
-            a += ((points[0].getxCoordinate() + points[points.length-1].getxCoordinate()) *
-                    (points[0].getyCoordinate() - points[points.length-1].getyCoordinate()));
-            return 0.5 * Math.abs(a);
-        } else {
-            throw new PolygonInvalidException();
         }
+        return shortestDist;
+    }
+
+
+    private double area() {
+        double a = 0;
+        for (int i = 0; i <= (points.length - 2); i++) {
+            a += ((points[i + 1].getxCoordinate() + points[i].getxCoordinate()) *
+                    (points[i + 1].getyCoordinate() - points[i].getyCoordinate()));
+        }
+        // for the last calculation that needs to use the first and last point
+        a += ((points[0].getxCoordinate() + points[points.length - 1].getxCoordinate()) *
+                (points[0].getyCoordinate() - points[points.length - 1].getyCoordinate()));
+        return 0.5 * Math.abs(a);
     }
 
     @Override
-    public boolean ComesBefore(Polygon p) {
-        return false; //TODO: this
+    public boolean ComesBefore(Object inObject) {
+        Polygon inPoly = (Polygon) inObject;
+
+        double inPolyArea = inPoly.area();
+        double thisPolyArea = this.area();
+
+        // Smallest poly
+        Polygon smallestPoly;
+        //Polygon largestPoly;
+        if (inPolyArea > thisPolyArea) {
+            smallestPoly = this;
+            //largestPoly = inPoly;
+        } else {
+            smallestPoly = inPoly;
+            //largestPoly = this;
+        }
+
+        // If within 0.05% of each other TODO: tests this
+        if (Math.abs(inPolyArea - thisPolyArea) <= (0.05 * smallestPoly.area())) {
+            return inPoly.shortestDistToOrigin() < this.shortestDistToOrigin();
+        } else { // not within 0.05%
+            return inPoly.area() > this.area();
+        }
     }
 
     @Override
@@ -58,15 +85,10 @@ public class Polygon implements ComparePoly {
         for (Point p : points) {
             str.append(p);
         }
-        try {
-            str.append(String.format("]:  %.2f", this.area()));
-        } catch (PolygonInvalidException e) {
-            return "Invalid Polygon";
-        }
+        str.append(String.format("]:  %.2f", this.area()));
         return str.toString();
     }
 
     static class PolygonFullException extends Exception {}
 
-    static class PolygonInvalidException extends Exception {}
 }

@@ -25,14 +25,19 @@ public class PA1 {
     }
 
     private void run(Path filePath) {
+        System.out.println("Unsorted list");
         MyPolygons p1 = new MyPolygons();
-        this.generatePolygonsFromFile(filePath, p1);
+        this.generatePolygonsFromFile(filePath, p1, false);
+        System.out.println(p1);
 
-        p1.testPrints();
+        System.out.println("Sorted list");
+        MyPolygons p2 = new MyPolygons();
+        this.generatePolygonsFromFile(filePath, p2, true);
+        System.out.println(p2);
     }
 
-    private void generatePolygonsFromFile(Path filePath, MyPolygons polys) {
-        System.out.println(filePath.toAbsolutePath());
+    private void generatePolygonsFromFile(Path filePath, MyPolygons polys, boolean insertInOrder) {
+        //System.out.println(filePath.toAbsolutePath());
         try {
             Scanner inputStream = new Scanner(Path.of(String.valueOf(filePath.toAbsolutePath())));
             Polygon currentPolygon = new Polygon();
@@ -40,16 +45,26 @@ public class PA1 {
                 String str = inputStream.next();
                 if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
                     if(currentPolygon.isValid()) { // if valid polygon
-                        polys.append(currentPolygon); // add last polygon
+                        if (insertInOrder) {
+                            polys.insertInOrder(currentPolygon);
+                        } else {
+                            polys.append(currentPolygon);
+                        }
+
                     }
                     currentPolygon = new Polygon(Integer.parseInt(inputStream.next()));
                     continue;
                 }
                 currentPolygon.addPoint(Double.parseDouble(str), Double.parseDouble(inputStream.next())); // gets the next two points
             }
-            polys.append(currentPolygon); // add last polygon
+            if (insertInOrder) {
+                polys.insertInOrder(currentPolygon);
+            } else {
+                polys.append(currentPolygon); // add last polygon
+            }
         } catch (Exception ignored) {
 
         }
     }
+
 }

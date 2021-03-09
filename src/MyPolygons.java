@@ -1,33 +1,37 @@
 
 public class MyPolygons {
-    private final Node sentinal;
+    private final Node sentinel;
     private Node current;
     private int size;
 
     MyPolygons() {
-        this.sentinal = new Node(null);
-        this.current = this.sentinal;
+        this.sentinel = new Node(null);
+        this.current = this.sentinel;
         this.size = 0;
     }
 
 
-    public void testPrints() {
+    public String toString() {
+        StringBuilder str = new StringBuilder();
         next();
         for (int i = 0; i < this.size; i++) {
-            Polygon p = (Polygon) current.getData();
-            System.out.println(p);
+            str.append((Polygon) current.getData());
+            str.append("\n");
             next();
         }
+        return str.toString();
     }
 
+    public void insertInOrder(Object inData) {
 
-    
+    }
+
     public void append(Object inData) { // too the end
-        this.add(inData, this.sentinal);
+        this.add(inData, this.sentinel);
     }
 
     public void prepend(Object inData) { // too the start
-        this.add(inData, this.sentinal.getNextNode());
+        this.add(inData, this.sentinel.getNextNode());
     }
 
     public void insert(Object inData) { // insert AT current index
@@ -56,7 +60,7 @@ public class MyPolygons {
     }
 
     public void reset() { // resets current to the start of the list
-        this.current = this.sentinal.getNextNode();
+        this.current = this.sentinel.getNextNode();
     }
 
     public Object take() { // TODO: ???
