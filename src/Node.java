@@ -1,5 +1,5 @@
 public class Node {
-    private Object data;
+    private Polygon data;
     private Node nextNode;
     private Node prevNode;
 
@@ -9,25 +9,25 @@ public class Node {
         this.prevNode = null;
     }
 
-    Node(Object inData, Node inNextNode, Node inPrevNode) {
+    Node(Polygon inData, Node inNextNode, Node inPrevNode) {
         this();
         this.data = inData;
         this.nextNode = inNextNode;
         this.prevNode = inPrevNode;
     }
 
-    Node(Object inData) {
+    Node(Polygon inData) {
         this();
         this.data = inData;
         this.setNextNode(this); // set next pointer to itself
         this.setPrevNode(this); // set prev pointer too itself
     }
 
-    public Object getData() {
+    public Polygon getData() {
         return data;
     }
 
-    public void setData(Object inData) {
+    public void setData(Polygon inData) {
         if (inData != null) { // or else it will become a Sentinal, BAD!
             this.data = inData;
         }

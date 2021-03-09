@@ -36,7 +36,13 @@ public class PA1 {
         System.out.println(p2);
     }
 
-    private void generatePolygonsFromFile(Path filePath, MyPolygons polys, boolean insertInOrder) {
+    /**
+     *
+     * @param filePath
+     * @param inPolys
+     * @param insertInOrder
+     */
+    private void generatePolygonsFromFile(Path filePath, MyPolygons inPolys, boolean insertInOrder) {
         //System.out.println(filePath.toAbsolutePath());
         try {
             Scanner inputStream = new Scanner(Path.of(String.valueOf(filePath.toAbsolutePath())));
@@ -46,9 +52,9 @@ public class PA1 {
                 if(str.equalsIgnoreCase("P")) { // start of a polygon ("P" or "p")
                     if(currentPolygon.isValid()) { // if valid polygon
                         if (insertInOrder) {
-                            polys.insertInOrder(currentPolygon);
+                            inPolys.insertInOrder(currentPolygon);
                         } else {
-                            polys.append(currentPolygon);
+                            inPolys.append(currentPolygon);
                         }
 
                     }
@@ -58,12 +64,12 @@ public class PA1 {
                 currentPolygon.addPoint(Double.parseDouble(str), Double.parseDouble(inputStream.next())); // gets the next two points
             }
             if (insertInOrder) {
-                polys.insertInOrder(currentPolygon);
+                inPolys.insertInOrder(currentPolygon);
             } else {
-                polys.append(currentPolygon); // add last polygon
+                inPolys.append(currentPolygon); // add last polygon
             }
         } catch (Exception ignored) {
-
+            System.out.println(ignored);
         }
     }
 

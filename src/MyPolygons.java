@@ -10,35 +10,48 @@ public class MyPolygons {
         this.size = 0;
     }
 
-
     public String toString() {
         StringBuilder str = new StringBuilder();
         next();
         for (int i = 0; i < this.size; i++) {
-            str.append((Polygon) current.getData());
+            str.append(current.getData());
             str.append("\n");
             next();
         }
         return str.toString();
     }
 
-    public void insertInOrder(Object inData) {
 
+    public void insertInOrder(Polygon inData) {
+        this.current = this.sentinel.getPrevNode();
+        if (this.size == 0) {
+            append(inData);
+            return;
+        }
+        for (int i = 0; i < this.size-1; i++) {
+            if (inData.ComesBefore(this.current.getData())) {
+                this.previous();
+            } else {
+                this.insert(inData);
+                return;
+            }
+        }
+        this.insert(inData);
     }
 
-    public void append(Object inData) { // too the end
+    public void append(Polygon inData) { // too the end
         this.add(inData, this.sentinel);
     }
 
-    public void prepend(Object inData) { // too the start
+    public void prepend(Polygon inData) { // too the start
         this.add(inData, this.sentinel.getNextNode());
     }
 
-    public void insert(Object inData) { // insert AT current index
+    public void insert(Polygon inData) { // insert AT current index
         this.add(inData, this.current);
     }
 
-    private void add(Object inData, Node n) { // adds at the index of node n
+    private void add(Polygon inData, Node n) { // adds at the index of node n
         Node temp = new Node(inData);
         temp.setNextNode(n);
         temp.setPrevNode(n.getPrevNode());
@@ -61,6 +74,10 @@ public class MyPolygons {
 
     public void reset() { // resets current to the start of the list
         this.current = this.sentinel.getNextNode();
+    }
+
+    public void resetEnd() {
+        this.current = this.sentinel.getPrevNode();
     }
 
     public Object take() { // TODO: ???

@@ -54,7 +54,7 @@ public class Polygon implements ComparePoly {
     }
 
     @Override
-    public boolean ComesBefore(Object inObject) {
+    public boolean ComesBefore(Object inObject) { // return true if THIS comesbefore the arg
         Polygon inPoly = (Polygon) inObject;
 
         double inPolyArea = inPoly.area();
@@ -73,11 +73,12 @@ public class Polygon implements ComparePoly {
 
         // If within 0.05% of each other TODO: tests this
         if (Math.abs(inPolyArea - thisPolyArea) <= (0.05 * smallestPoly.area())) {
-            return inPoly.shortestDistToOrigin() < this.shortestDistToOrigin();
+            return this.shortestDistToOrigin() < inPoly.shortestDistToOrigin();
         } else { // not within 0.05%
-            return inPoly.area() > this.area();
+            return this.area() > inPoly.area();
         }
     }
+
 
     @Override
     public String toString() {
