@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class MyPolygons {
     private final Node sentinal;
@@ -11,14 +10,6 @@ public class MyPolygons {
         this.size = 0;
     }
 
-    MyPolygons(ArrayList<Polygon> inData) {
-        this();
-        if (inData != null) { // check yo
-            for (Polygon p : inData) {
-                this.append(p);
-            }
-        }
-    }
 
     public void testPrints() {
         next();
@@ -29,6 +20,8 @@ public class MyPolygons {
         }
     }
 
+
+    
     public void append(Object inData) { // too the end
         this.add(inData, this.sentinal);
     }
