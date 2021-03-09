@@ -12,7 +12,7 @@ public class MyPolygons {
 
     public String toString() {
         StringBuilder str = new StringBuilder();
-        next();
+        this.reset();
         for (int i = 0; i < this.size; i++) {
             str.append(current.getData());
             str.append("\n");
@@ -23,14 +23,14 @@ public class MyPolygons {
 
 
     public void insertInOrder(Polygon inData) {
-        this.current = this.sentinel.getPrevNode();
+        this.reset();
         if (this.size == 0) {
-            append(inData);
+            prepend(inData);
             return;
         }
-        for (int i = 0; i < this.size-1; i++) {
-            if (inData.ComesBefore(this.current.getData())) {
-                this.previous();
+        for (int i = 0; i < this.size; i++) {
+            if (!inData.ComesBefore(this.current.getData())) {
+                this.next();
             } else {
                 this.insert(inData);
                 return;
