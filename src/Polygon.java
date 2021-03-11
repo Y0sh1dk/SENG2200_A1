@@ -1,12 +1,12 @@
 /**
- *  FileName: Polygon.java
- *  Assessment: SENG2200 - A1
- *  Author: Yosiah de Koeyer
- *  Student No: c3329520
- *
- *  Description:
- *  Polygon class that implements the ComparePoly interface. Stores a fix number of instances of the Point class
- *  and provides relevant methods.
+ * FileName: Polygon.java
+ * Assessment: SENG2200 - A1
+ * Author: Yosiah de Koeyer
+ * Student No: c3329520
+ * <p>
+ * Description:
+ * Polygon class that implements the ComparePoly interface. Stores a fix number of instances of the Point class
+ * and provides relevant methods.
  */
 
 public class Polygon implements ComparePoly {
@@ -23,6 +23,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * Polygon class constructor when the size is given
+     *
      * @param inSize the number of points the polygon can contain
      */
     Polygon(int inSize) {
@@ -32,7 +33,8 @@ public class Polygon implements ComparePoly {
 
     /**
      * setSize() method
-     * @param inSize the number of points the polygonc an contain
+     *
+     * @param inSize the number of points the polygon can contain
      */
     public void setSize(int inSize) {
         this.points = new Point[inSize];
@@ -40,6 +42,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * addPoint() method
+     *
      * @param inXCoord x coord of new point
      * @param inYCoord y coord of new point
      * @throws PolygonFullException when the polygon cannot hold any more points
@@ -55,6 +58,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * isValid() method
+     *
      * @return a boolean, true if the polygon is valid, false if not (valid if 3 or more points)
      */
     public boolean isValid() {
@@ -63,11 +67,12 @@ public class Polygon implements ComparePoly {
 
     /**
      * shortestDistToOrigin() method
+     *
      * @return the shortest distance of all the points to the origin
      */
     public double shortestDistToOrigin() {
         double shortestDist = this.points[0].distFromOrigin(); // Initialize with any value from the array
-        for(Point p: this.points) {
+        for (Point p : this.points) {
             if (p.distFromOrigin() < shortestDist) {
                 shortestDist = p.distFromOrigin();
             }
@@ -77,6 +82,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * area() method
+     *
      * @return the area of the polygon
      */
     private double area() {
@@ -93,6 +99,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * Overridden ComesBefore() method
+     *
      * @param inObject Polygon to compare to the current polyogn
      * @return true if this polygon comes before the given, else false.
      * A Polygon comes before if it has a larger area, if the same area, it comes before
@@ -127,6 +134,7 @@ public class Polygon implements ComparePoly {
 
     /**
      * Overridden toString() method
+     *
      * @return a String representation of the Polygon
      */
     @Override
@@ -142,6 +150,7 @@ public class Polygon implements ComparePoly {
     /**
      * Custom exception to throw when points can no longer be added too the polygon
      */
-    static class PolygonFullException extends Exception {}
+    static class PolygonFullException extends Exception {
+    }
 
 }
