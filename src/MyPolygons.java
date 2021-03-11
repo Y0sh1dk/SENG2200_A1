@@ -1,3 +1,13 @@
+/**
+ *  FileName: MyPolygons.java
+ *  Assessment: SENG2200 - A1
+ *  Author: Yosiah de Koeyer
+ *  Student No: c3329520
+ *
+ *  Description:
+ *  MyPolygons class that implements a Circular Linked List (CLL) as its underlying data structure. Stores and sorts
+ *  instances of the Polygon class
+ */
 
 public class MyPolygons {
     private final Node sentinel;
@@ -10,6 +20,7 @@ public class MyPolygons {
         this.size = 0;
     }
 
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.reset();

@@ -2,7 +2,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+/**
+ *  FileName: PA1.java
+ *  Assessment: SENG2200 - A1
+ *  Author: Yosiah de Koeyer
+ *  Student No: c3329520
+ *
+ *  Description:
+ *  Main class file for A1, accepts a file path from the command line args and generates and inserts polygons into
+ *  a CLL.
+ */
+
 public class PA1 {
+    /**
+     * Entry point method for PA1 class
+     * @param args takes params from cmd args
+     */
     public static void main(String[] args) {
         if (args.length != 1) { // If no args given, or too many args, exit
             System.out.println("Usage: PA1 [file]");
@@ -24,6 +39,10 @@ public class PA1 {
         }
     }
 
+    /**
+     * run() method
+     * @param filePath a path object generated from the input file
+     */
     private void run(Path filePath) {
         System.out.println("Unsorted list");
         MyPolygons p1 = new MyPolygons();
@@ -37,8 +56,8 @@ public class PA1 {
     }
 
     /**
-     *
-     * @param filePath
+     * generatePolygonsFromFile() method
+     * @param filePath a path object generated from the input file
      * @param inPolys
      * @param insertInOrder
      */

@@ -1,3 +1,13 @@
+/**
+ *  FileName: Node.java
+ *  Assessment: SENG2200 - A1
+ *  Author: Yosiah de Koeyer
+ *  Student No: c3329520
+ *
+ *  Description:
+ *  Node class, used in the creation of the CLL
+ */
+
 public class Node {
     private Polygon data;
     private Node nextNode;

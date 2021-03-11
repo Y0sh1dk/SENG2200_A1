@@ -1,3 +1,13 @@
+/**
+ *  FileName: Polygon.java
+ *  Assessment: SENG2200 - A1
+ *  Author: Yosiah de Koeyer
+ *  Student No: c3329520
+ *
+ *  Description:
+ *  Polygon class that implements the ComparePoly interface. Stores a fix number of instances of the Point class
+ *  and provides relevant methods.
+ */
 
 public class Polygon implements ComparePoly {
     private static final int minNumOfSides = 3; // Polygon cant have less than 3 sides yo

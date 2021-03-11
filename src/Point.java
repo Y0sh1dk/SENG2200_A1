@@ -1,5 +1,16 @@
 import java.lang.Math;
 
+/**
+ *  FileName: Point.java
+ *  Assessment: SENG2200 - A1
+ *  Author: Yosiah de Koeyer
+ *  Student No: c3329520
+ *
+ *  Description:
+ *  Point class, used to represent a point on the cartesian plane. provides method for calculating the distance
+ *  from the origin.
+ */
+
 public class Point {
     // Presumes that origin is (0,0)
     private static final double originX = 0;
