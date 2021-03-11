@@ -13,6 +13,8 @@ import java.util.Scanner;
  *  a CLL.
  */
 
+// TODO: make getters/setters final!
+
 public class PA1 {
     /**
      * Entry point method for PA1 class
@@ -58,11 +60,10 @@ public class PA1 {
     /**
      * generatePolygonsFromFile() method
      * @param filePath a path object generated from the input file
-     * @param inPolys
-     * @param insertInOrder
+     * @param inPolys MyPolygons instance to add polygons too
+     * @param insertInOrder a Boolean to determine if polygons are inserted in order or not
      */
     private void generatePolygonsFromFile(Path filePath, MyPolygons inPolys, boolean insertInOrder) {
-        //System.out.println(filePath.toAbsolutePath());
         try {
             Scanner inputStream = new Scanner(Path.of(String.valueOf(filePath.toAbsolutePath())));
             Polygon currentPolygon = new Polygon();
@@ -88,7 +89,6 @@ public class PA1 {
                 inPolys.append(currentPolygon); // add last polygon
             }
         } catch (Exception ignored) {
-            System.out.println(ignored);
         }
     }
 

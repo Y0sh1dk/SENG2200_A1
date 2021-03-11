@@ -14,12 +14,19 @@ public class MyPolygons {
     private Node current;
     private int size;
 
+    /**
+     * MyPolygons class constructor when no arguments are given
+     */
     MyPolygons() {
         this.sentinel = new Node(null);
         this.current = this.sentinel;
         this.size = 0;
     }
 
+    /**
+     * Overridden toString() method
+     * @return a String representation of the MyPolygons instance
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -33,6 +40,10 @@ public class MyPolygons {
     }
 
 
+    /**
+     * insertInOrder() method
+     * @param inData data to be inserted (in order) into the CLL
+     */
     public void insertInOrder(Polygon inData) {
         this.reset();
         if (this.size == 0) {
@@ -50,19 +61,36 @@ public class MyPolygons {
         this.insert(inData);
     }
 
-    public void append(Polygon inData) { // too the end
+    /**
+     * append() method
+     * @param inData data to add too the end of the CLL
+     */
+    public void append(Polygon inData) {
         this.add(inData, this.sentinel);
     }
 
-    public void prepend(Polygon inData) { // too the start
+    /**
+     * prepend() method
+     * @param inData data to add to the start of the CLL
+     */
+    public void prepend(Polygon inData) {
         this.add(inData, this.sentinel.getNextNode());
     }
 
-    public void insert(Polygon inData) { // insert AT current index
+    /**
+     * insert() method
+     * @param inData data to be inserted at the current index of the CLL
+     */
+    public void insert(Polygon inData) {
         this.add(inData, this.current);
     }
 
-    private void add(Polygon inData, Node n) { // adds at the index of node n
+    /**
+     * add() method
+     * @param inData data to be inserted at the index of the given node
+     * @param n the node to determine where to insert the data (at this nodes index)
+     */
+    private void add(Polygon inData, Node n) {
         Node temp = new Node(inData);
         temp.setNextNode(n);
         temp.setPrevNode(n.getPrevNode());
@@ -71,27 +99,51 @@ public class MyPolygons {
         this.size++;
     }
 
+    /**
+     * next() method
+     * Moves the current pointer forward one
+     */
     public void next() {
         this.current = this.current.getNextNode();
     }
 
+    /**
+     * previous() method
+     * Moves the current pointer backwards one
+     */
     public void previous() {
         this.current = this.current.getPrevNode();
     }
 
-    public Object getCurrent() {
+    /**
+     * getCurrent() method
+     * @return the Polygon object stored in the current node
+     */
+    public Polygon getCurrent() {
         return this.current.getData();
     }
 
-    public void reset() { // resets current to the start of the list
+    /**
+     * reset() method
+     * Resets the current pointer to the start of the CLL
+     */
+    public void reset() {
         this.current = this.sentinel.getNextNode();
     }
 
+    /**
+     * resetEnd() method
+     * Resets the current pointer to the end of the CLL
+     */
     public void resetEnd() {
         this.current = this.sentinel.getPrevNode();
     }
 
-    public Object take() { // TODO: ???
-        return new Object();
+    /**
+     * take() method
+     * @return the data stored in the node at the start of the CLL
+     */
+    public Polygon take() { // TODO: ???
+        return new Polygon();
     }
 }

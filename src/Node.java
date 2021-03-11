@@ -13,12 +13,21 @@ public class Node {
     private Node nextNode;
     private Node prevNode;
 
+    /**
+     * Node class constructor when no args are given
+     */
     Node() {
         this.data = null;
         this.nextNode = null;
         this.prevNode = null;
     }
 
+    /**
+     * Node class constructor when data, next and prev nodes are given
+     * @param inData data to be added too the node
+     * @param inNextNode Node to set as the next node of this one
+     * @param inPrevNode Node to set as the prev node of this one
+     */
     Node(Polygon inData, Node inNextNode, Node inPrevNode) {
         this();
         this.data = inData;
@@ -26,6 +35,11 @@ public class Node {
         this.prevNode = inPrevNode;
     }
 
+    /**
+     * Node class constructor when only data is given
+     * Sets next and prev pointers too itself
+     * @param inData data to be added too the node
+     */
     Node(Polygon inData) {
         this();
         this.data = inData;
@@ -33,28 +47,53 @@ public class Node {
         this.setPrevNode(this); // set prev pointer too itself
     }
 
+    /**
+     * getData() method
+     * @return the data stored in the node
+     */
     public Polygon getData() {
         return data;
     }
 
+    /**
+     * setData() method
+     * Does not allow you to set the data to null
+     * @param inData data to set as the data of this node
+     */
     public void setData(Polygon inData) {
         if (inData != null) { // or else it will become a Sentinal, BAD!
             this.data = inData;
         }
     }
 
+    /**
+     * getNextNode() method
+     * @return the node that is after this node
+     */
     public Node getNextNode() {
         return nextNode;
     }
 
+    /**
+     * setNextNode() method
+     * @param nextNode Node to set as the next node of this one
+     */
     public void setNextNode(Node nextNode) {
         this.nextNode = nextNode;
     }
 
+    /**
+     * getPrevNode() method
+     * @return the node that is before this node
+     */
     public Node getPrevNode() {
         return prevNode;
     }
 
+    /**
+     * setPrevNode() method
+     * @param prevNode Node to set as the prev node of this one
+     */
     public void setPrevNode(Node prevNode) {
         this.prevNode = prevNode;
     }
