@@ -124,7 +124,7 @@ public class Polygon implements ComparePoly {
         }
 
         // If within 0.05% of each other TODO: tests this
-        if (Math.abs(inPolyArea - thisPolyArea) <= (0.05 * smallestPoly.area())) {
+        if (Math.abs(inPolyArea - thisPolyArea) <= (0.0005 * smallestPoly.area())) {
             return this.shortestDistToOrigin() < inPoly.shortestDistToOrigin();
         } else { // not within 0.05%
             return this.area() > inPoly.area();
