@@ -151,7 +151,7 @@ public class MyPolygons {
      *
      * @return the data stored in the node at the start of the CLL
      */
-    public Polygon take() { // TODO: ???
+    public Polygon take() {
         reset();
         Polygon p = this.current.getData();
         remove();
@@ -168,6 +168,7 @@ public class MyPolygons {
         this.current.setNextNode(null);
         this.current.setPrevNode(null);
         reset();
+        this.size--;
     }
 
     /**
@@ -175,6 +176,6 @@ public class MyPolygons {
      * @return the size of the CLL
      */
     public int getSize() {
-        return size;
+        return this.size;
     }
 }

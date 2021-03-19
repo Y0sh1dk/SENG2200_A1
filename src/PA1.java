@@ -53,9 +53,11 @@ public class PA1 {
         this.generatePolygonsFromFile(filePath, p1, false);             // Add polygons from file
         System.out.println(p1);                                         // Print string rep of class
 
-        System.out.println("Sorted list");
         MyPolygons p2 = new MyPolygons();                               // Create new MyPolygons instance
-        this.generatePolygonsFromFile(filePath, p2, true);              // Add polygons form file (in order)
+        int p1Size = p1.getSize();
+        for (int i = 0; i < p1Size; i++) {
+            p2.insertInOrder(p1.take());
+        }
         System.out.println(p2);                                         // Print string rep of class
     }
 
