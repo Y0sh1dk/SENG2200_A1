@@ -152,6 +152,29 @@ public class MyPolygons {
      * @return the data stored in the node at the start of the CLL
      */
     public Polygon take() { // TODO: ???
-        return new Polygon();
+        reset();
+        Polygon p = this.current.getData();
+        remove();
+        return p;
+    }
+
+    /**
+     * remove() method
+     * removes the data at the current
+     */
+    public void remove() {
+        this.current.getNextNode().setPrevNode(this.current.getPrevNode());
+        this.current.getPrevNode().setNextNode(this.current.getNextNode());
+        this.current.setNextNode(null);
+        this.current.setPrevNode(null);
+        reset();
+    }
+
+    /**
+     * getSize() method
+     * @return the size of the CLL
+     */
+    public int getSize() {
+        return size;
     }
 }
