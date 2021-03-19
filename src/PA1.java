@@ -58,6 +58,7 @@ public class PA1 {
         for (int i = 0; i < p1Size; i++) {
             p2.insertInOrder(p1.take());
         }
+        System.out.println("Sorted list");
         System.out.println(p2);                                         // Print string rep of class
     }
 
